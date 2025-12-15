@@ -1,0 +1,16 @@
+# FastAPI and server dependencies
+fastapi
+uvicorn[standard]
+python-multipart
+
+# MongoDB
+pymongo
+
+# LLM and AI dependencies
+ollama
+
+# Environment and configuration
+python-dotenv
+
+# Utilities
+pydantic

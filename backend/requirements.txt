@@ -1,0 +1,23 @@
+# FastAPI and server dependencies
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+python-multipart==0.0.6
+
+# MongoDB
+pymongo==4.6.1
+
+# LLM and AI dependencies
+langchain==0.1.5
+langchain-community==0.0.17
+ollama==0.1.6
+
+# Environment and configuration
+python-dotenv==1.0.0
+
+# CORS and security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# Utilities
+pydantic==2.5.3
+pydantic-settings==2.1.0
