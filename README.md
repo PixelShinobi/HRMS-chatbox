@@ -8,9 +8,13 @@ An AI-powered Human Resources Management System chatbot that helps HR staff memb
 - **Immigration & Visa Status**: Track H-1B, Green Card, OPT, CPT, and other visa types with expiration dates
 - **Benefits Information**: Access health insurance, dental, vision, and 401k details
 - **Policy Questions**: Get information about sick days, vacation, holidays, and employment agreements
+- **Role-Based Access Control (RBAC)**: HR Lead vs HR Junior with different data access levels
 - **Smart Context Retrieval**: RAG (Retrieval-Augmented Generation) pipeline for accurate responses
 - **Local LLM**: Powered by Deepseek-R1 running on Ollama (privacy-focused, no API costs)
-- **Modern UI**: React-based chat interface with real-time responses
+- **Modern UI**: React-based chat interface with real-time streaming responses
+- **Dark Mode**: Toggle between light and dark themes
+- **PDF Export**: Download conversation transcripts as PDF
+- **Docker Support**: Run entire stack with one command
 
 ## Tech Stack
 
@@ -77,7 +81,28 @@ Before you begin, ensure you have the following installed:
      ollama pull deepseek-r1:8b
      ```
 
-## Installation & Setup
+## Quick Start with Docker (Recommended!)
+
+The easiest way to run the application is using Docker:
+
+```bash
+# 1. Make sure Ollama is running with the model
+ollama pull deepseek-r1:8b
+ollama serve  # or just have Ollama Desktop running
+
+# 2. Start everything with one command
+docker-compose up
+```
+
+That's it! Open http://localhost:3000 and start using the chatbot.
+
+**First time?** See [DOCKER_GUIDE.md](DOCKER_GUIDE.md) for detailed Docker instructions.
+
+**Prefer manual setup?** Continue reading below for traditional installation.
+
+---
+
+## Manual Installation & Setup
 
 ### 1. Clone/Download the Project
 
@@ -299,13 +324,21 @@ npm test
 
 ### Building for Production
 
-#### Backend
-The FastAPI backend can be deployed using:
-- **Docker**: Create a Dockerfile
-- **Heroku**: Use Procfile
-- **AWS/Azure**: Deploy as containerized app
+#### Using Docker (Recommended)
+```bash
+# Build and run with Docker Compose
+docker-compose up --build -d
 
-#### Frontend
+# Deploy containers to:
+# - AWS ECS/Fargate
+# - DigitalOcean App Platform
+# - Google Cloud Run
+# - Azure Container Apps
+```
+
+#### Manual Build
+**Backend**: Deploy FastAPI using Uvicorn, Gunicorn, or containerize
+**Frontend**:
 ```bash
 cd frontend
 npm run build

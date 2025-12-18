@@ -2,9 +2,10 @@ import { Message } from '../types';
 
 interface ChatMessageProps {
   message: Message;
+  darkMode?: boolean;
 }
 
-export default function ChatMessage({ message }: ChatMessageProps) {
+export default function ChatMessage({ message, darkMode }: ChatMessageProps) {
   const isUser = message.role === 'user';
 
   return (
@@ -12,7 +13,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       <div className={`flex max-w-3xl ${isUser ? 'flex-row-reverse' : 'flex-row'} items-start gap-3`}>
         {/* Avatar */}
         <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${
-          isUser ? 'bg-indigo-600' : 'bg-gray-600'
+          isUser ? 'bg-indigo-600' : darkMode ? 'bg-gray-600' : 'bg-gray-600'
         }`}>
           {isUser ? (
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -29,6 +30,8 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         <div className={`rounded-2xl px-5 py-3 ${
           isUser
             ? 'bg-indigo-600 text-white'
+            : darkMode
+            ? 'bg-gray-700 text-gray-100'
             : 'bg-gray-100 text-gray-900'
         }`}>
           <div className="text-sm font-medium mb-1">
@@ -38,7 +41,13 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             {message.content}
           </div>
           {message.timestamp && (
-            <div className={`text-xs mt-2 ${isUser ? 'text-indigo-200' : 'text-gray-500'}`}>
+            <div className={`text-xs mt-2 ${
+              isUser
+                ? 'text-indigo-200'
+                : darkMode
+                ? 'text-gray-400'
+                : 'text-gray-500'
+            }`}>
               {new Date(message.timestamp).toLocaleTimeString()}
             </div>
           )}

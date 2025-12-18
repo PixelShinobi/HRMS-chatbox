@@ -3,9 +3,10 @@ import { useState } from 'react';
 interface ChatInputProps {
   onSendMessage: (message: string) => void;
   disabled?: boolean;
+  darkMode?: boolean;
 }
 
-export default function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
+export default function ChatInput({ onSendMessage, disabled, darkMode }: ChatInputProps) {
   const [input, setInput] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -24,7 +25,7 @@ export default function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="border-t border-gray-200 bg-white p-4">
+    <form onSubmit={handleSubmit} className={`border-t ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'} p-4`}>
       <div className="flex items-end gap-3">
         <div className="flex-1">
           <textarea
@@ -34,7 +35,11 @@ export default function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
             placeholder="Ask about employees, visa status, benefits, policies..."
             disabled={disabled}
             rows={1}
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl resize-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100 disabled:cursor-not-allowed"
+            className={`w-full px-4 py-3 border ${
+              darkMode
+                ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400'
+                : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
+            } rounded-xl resize-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100 dark:disabled:bg-gray-600 disabled:cursor-not-allowed`}
             style={{ minHeight: '50px', maxHeight: '150px' }}
             onInput={(e) => {
               const target = e.target as HTMLTextAreaElement;
@@ -46,7 +51,7 @@ export default function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
         <button
           type="submit"
           disabled={!input.trim() || disabled}
-          className="bg-indigo-600 text-white p-3 rounded-xl hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 transition duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed flex-shrink-0"
+          className="bg-indigo-600 text-white p-3 rounded-xl hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 transition duration-200 disabled:bg-gray-300 dark:disabled:bg-gray-600 disabled:cursor-not-allowed flex-shrink-0"
         >
           {disabled ? (
             <svg className="w-6 h-6 animate-spin" fill="none" viewBox="0 0 24 24">

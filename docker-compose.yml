@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: hrms-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      # Persist database data
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: HRWIKI
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend (FastAPI)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: hrms-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount source code for hot reload
+      - ./backend:/app
+      # Prevent overwriting node_modules in container
+      - /app/venv
+    environment:
+      # MongoDB connection
+      - MONGODB_URI=mongodb://mongodb:27017/
+      - DB_NAME=HRWIKI
+      # Ollama runs on host machine, not in Docker
+      # Use host.docker.internal to connect to host
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - OLLAMA_MODEL=deepseek-r1:8b
+      - LLM_TEMPERATURE=0.7
+      - LLM_MAX_TOKENS=2000
+      # Auth
+      - CHATBOT_PASSWORD=hr2025
+      - HR_USERS={"alice": {"password": "lead123", "role": "hr_lead"}, "bob": {"password": "junior456", "role": "hr_junior"}}
+      # Server
+      - HOST=0.0.0.0
+      - PORT=8000
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:3001
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    extra_hosts:
+      # Allow container to access host machine (for Ollama)
+      - "host.docker.internal:host-gateway"
+
+  # Frontend (React + Vite)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: hrms-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount source code for hot reload
+      - ./frontend:/app
+      # Prevent overwriting node_modules in container
+      - /app/node_modules
+    environment:
+      # Vite config
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    stdin_open: true
+    tty: true
+
+# Persistent volumes
+volumes:
+  mongodb_data:
+    driver: local

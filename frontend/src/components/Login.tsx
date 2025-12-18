@@ -3,9 +3,10 @@ import { useState } from 'react';
 interface LoginProps {
   onLogin: (username: string, password: string) => void;
   error?: string;
+  darkMode?: boolean;
 }
 
-export default function Login({ onLogin, error }: LoginProps) {
+export default function Login({ onLogin, error, darkMode }: LoginProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -18,12 +19,12 @@ export default function Login({ onLogin, error }: LoginProps) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+    <div className={`min-h-screen flex items-center justify-center ${darkMode ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-50 to-indigo-100'}`}>
+      <div className={`${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white'} p-8 rounded-2xl shadow-xl w-full max-w-md`}>
         <div className="text-center mb-8">
-          <div className="inline-block p-3 bg-indigo-100 rounded-full mb-4">
+          <div className={`inline-block p-3 ${darkMode ? 'bg-indigo-900' : 'bg-indigo-100'} rounded-full mb-4`}>
             <svg
-              className="w-12 h-12 text-indigo-600"
+              className={`w-12 h-12 ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -36,10 +37,10 @@ export default function Login({ onLogin, error }: LoginProps) {
               />
             </svg>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'} mb-2`}>
             HRMS AI Chatbot
           </h1>
-          <p className="text-gray-600">
+          <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
             Sign in to access the HR assistant
           </p>
         </div>
@@ -48,7 +49,7 @@ export default function Login({ onLogin, error }: LoginProps) {
           <div>
             <label
               htmlFor="username"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}
             >
               Username
             </label>
@@ -57,7 +58,7 @@ export default function Login({ onLogin, error }: LoginProps) {
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition"
+              className={`w-full px-4 py-3 border ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900'} rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition`}
               placeholder="Enter username"
               autoFocus
             />
@@ -66,7 +67,7 @@ export default function Login({ onLogin, error }: LoginProps) {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}
             >
               Password
             </label>
@@ -76,13 +77,13 @@ export default function Login({ onLogin, error }: LoginProps) {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition"
+                className={`w-full px-4 py-3 border ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900'} rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition`}
                 placeholder="Enter password"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                className={`absolute right-3 top-1/2 -translate-y-1/2 ${darkMode ? 'text-gray-400 hover:text-gray-200' : 'text-gray-500 hover:text-gray-700'}`}
               >
                 {showPassword ? (
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -99,7 +100,7 @@ export default function Login({ onLogin, error }: LoginProps) {
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+            <div className={`${darkMode ? 'bg-red-900 border-red-700 text-red-200' : 'bg-red-50 border-red-200 text-red-700'} border px-4 py-3 rounded-lg text-sm`}>
               {error}
             </div>
           )}
@@ -112,16 +113,16 @@ export default function Login({ onLogin, error }: LoginProps) {
           </button>
         </form>
 
-        <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-          <div className="text-sm text-gray-600 font-medium mb-2">Demo Credentials:</div>
+        <div className={`mt-6 p-4 ${darkMode ? 'bg-gray-700' : 'bg-gray-50'} rounded-lg`}>
+          <div className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'} font-medium mb-2`}>Demo Credentials:</div>
           <div className="space-y-1 text-sm">
             <div className="flex justify-between">
-              <span className="text-gray-500">HR Lead (Full Access):</span>
-              <code className="bg-white px-2 py-0.5 rounded text-indigo-600">alice / lead123</code>
+              <span className={darkMode ? 'text-gray-400' : 'text-gray-500'}>HR Lead (Full Access):</span>
+              <code className={`${darkMode ? 'bg-gray-800 text-indigo-400' : 'bg-white text-indigo-600'} px-2 py-0.5 rounded`}>alice / lead123</code>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-500">HR Junior (Restricted):</span>
-              <code className="bg-white px-2 py-0.5 rounded text-indigo-600">bob / junior456</code>
+              <span className={darkMode ? 'text-gray-400' : 'text-gray-500'}>HR Junior (Restricted):</span>
+              <code className={`${darkMode ? 'bg-gray-800 text-indigo-400' : 'bg-white text-indigo-600'} px-2 py-0.5 rounded`}>bob / junior456</code>
             </div>
           </div>
         </div>
