@@ -81,9 +81,9 @@ Before you begin, ensure you have the following installed:
      ollama pull deepseek-r1:8b
      ```
 
-## Quick Start with Docker (Recommended!)
+## Docker Quickstart
 
-The easiest way to run the application is using Docker:
+The easiest way to run the application is using Docker (requires Docker Desktop and Ollama installed on your host):
 
 ```bash
 # 1. Make sure Ollama is running with the model
@@ -95,8 +95,6 @@ docker-compose up
 ```
 
 That's it! Open http://localhost:3000 and start using the chatbot.
-
-**First time?** See [DOCKER_GUIDE.md](DOCKER_GUIDE.md) for detailed Docker instructions.
 
 **Prefer manual setup?** Continue reading below for traditional installation.
 
