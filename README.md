@@ -106,7 +106,7 @@ That's it! Open http://localhost:3000 and start using the chatbot.
 
 If you haven't already, navigate to your project directory:
 ```bash
-cd "C:\Users\Jizhou\Desktop\HRMS chatbox"
+cd HRMS-chatbox
 ```
 
 ### 2. Backend Setup
@@ -138,15 +138,16 @@ Create a `.env` file in the `backend/` directory:
 copy .env.example .env
 ```
 
-Edit `.env` with your settings (default values work for local development):
+Edit `.env` with your settings (placeholders shown below):
 ```env
 MONGODB_URI=mongodb://localhost:27017/
 DB_NAME=HRWIKI
-CHATBOT_PASSWORD=hr2025
+CHATBOT_PASSWORD=change_me
 OLLAMA_MODEL=deepseek-r1:8b
 LLM_TEMPERATURE=0.7
 LLM_MAX_TOKENS=2000
 ```
+Demo auth only; replace secrets locally.
 
 #### Step 5: Start MongoDB
 - **Windows**: Start MongoDB service or run `mongod`
@@ -197,7 +198,7 @@ The frontend will run on `http://localhost:3000`
    - Open your browser and navigate to `http://localhost:3000`
 
 2. **Login**
-   - Enter the password (default: `hr2025`)
+   - Enter the password set in `backend/.env` (template default: `change_me`)
 
 3. **Start Asking Questions**
    - Try the suggested questions or ask your own:

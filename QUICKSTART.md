@@ -53,7 +53,7 @@ npm run dev
 ## Access the Application
 
 1. Open browser: `http://localhost:3000`
-2. Login with password: `hr2025`
+2. Login with the password set in `backend/.env` (template default: `change_me`)
 3. Start chatting!
 
 ## First Time Setup Only
@@ -138,4 +138,3 @@ For detailed documentation, see README.md
 For issues, contact the development team.
 
 ---
-
