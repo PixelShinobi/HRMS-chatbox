@@ -2,6 +2,8 @@
 
 An AI-powered Human Resources Management System chatbot that helps HR staff members answer questions about employees, immigration/visa status, benefits, and company policies.
 
+All employee records and HR data in this repository are demo/mock data for demonstration only.
+
 ## Features
 
 - **Employee Information Queries**: Search employee data by ID, join date, position, and more
@@ -58,6 +60,8 @@ HRMS chatbox/
 ├── QUICKSTART.md            # Quick setup guide
 └── PROJECT_SUMMARY.md       # Project overview
 ```
+
+Demo dataset is included for local testing; do not use real PII.
 
 ## Prerequisites
 
@@ -159,6 +163,7 @@ Demo auth only; replace secrets locally.
 python load_data.py
 ```
 This will import all JSON files from `MongoDB Database_HRWIKI/` into MongoDB.
+Demo dataset is included for local testing; do not use real PII.
 
 #### Step 7: Start Ollama with Deepseek
 In a separate terminal:
