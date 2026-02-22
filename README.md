@@ -56,8 +56,6 @@ ollama pull deepseek-r1:8b
 docker-compose up
 ```
 
-Open http://localhost:3000.
-
 ### Manual Setup
 
 **Prerequisites:** Python 3.9+, Node.js 18+, MongoDB, Ollama
@@ -70,12 +68,12 @@ source venv/bin/activate    # Linux/Mac
 venv\Scripts\activate       # Windows
 pip install -r requirements.txt
 python load_data.py         # Import HR data into MongoDB
-python main.py              # Starts on http://localhost:8000
+python main.py             
 
 # Frontend (new terminal)
 cd frontend
 npm install
-npm run dev                 # Starts on http://localhost:3000
+npm run dev                
 ```
 
 ## API Endpoints
