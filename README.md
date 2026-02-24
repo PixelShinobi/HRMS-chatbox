@@ -2,6 +2,11 @@
 
 A full-stack AI-powered HR assistant that answers employee-data and HR policy questions by combining structured database queries with LLM-driven chat workflows.
 
+## Data Notice
+
+All data in this repository is mock data for demo/project use only.
+It does not contain real employee personal data or private company production data.
+
 ## Tech Stack
 
 | Layer | Technology |
